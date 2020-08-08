@@ -2,6 +2,7 @@ package br.com.brunoKayser.workshopMongoDb.service;
 
 
 import br.com.brunoKayser.workshopMongoDb.domain.User;
+import br.com.brunoKayser.workshopMongoDb.dto.UserDTO;
 import br.com.brunoKayser.workshopMongoDb.repository.UserRepository;
 import br.com.brunoKayser.workshopMongoDb.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,13 @@ public class UserService {
             }
             return user;
     }
+
+    public void insert(User obj){
+        userRepository.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDTO){
+        return new User(objDTO.getId(),objDTO.getName(),objDTO.getEmail());
+    }
+
 }

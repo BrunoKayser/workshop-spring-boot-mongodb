@@ -2,13 +2,15 @@ package br.com.brunoKayser.workshopMongoDb.domain;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
@@ -21,4 +23,12 @@ public class User implements Serializable {
     private String name;
     private String email;
 
+    @DBRef (lazy = true) //lazy é para os dados da lista não carregar quando chamar o User no banco
+    private List<Post> posts = new ArrayList<>();
+
+    public User(String id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
 }

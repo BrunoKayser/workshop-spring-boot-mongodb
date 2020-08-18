@@ -67,7 +67,6 @@ public class UserResource {
         obj.setId(id);
         userService.update(obj);
         return ResponseEntity.noContent().build();
-
     }
 
     @GetMapping(value ="/{id}/posts")

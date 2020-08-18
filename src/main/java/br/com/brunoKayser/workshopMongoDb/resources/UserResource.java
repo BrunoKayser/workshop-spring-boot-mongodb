@@ -1,5 +1,6 @@
 package br.com.brunoKayser.workshopMongoDb.resources;
 
+import br.com.brunoKayser.workshopMongoDb.domain.Post;
 import br.com.brunoKayser.workshopMongoDb.domain.User;
 import br.com.brunoKayser.workshopMongoDb.dto.UserDTO;
 import br.com.brunoKayser.workshopMongoDb.dto.UserOptionalDTO;
@@ -60,12 +61,19 @@ public class UserResource {
     }
 
     @PutMapping(value = "{id}")
-    public ResponseEntity<Void> update( @RequestBody UserDTO objDTO, @PathVariable String id){
+    public ResponseEntity<Void> update( @RequestBody UserDTO objDTO, @PathVariable String id) {
+
         User obj = userService.fromDTO(objDTO);
         obj.setId(id);
-        obj = userService.update(obj);
+        userService.update(obj);
         return ResponseEntity.noContent().build();
 
+    }
+
+    @GetMapping(value ="/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        Optional<User> obj = userService.findById(id);
+        return ResponseEntity.ok().body(obj.get().getPosts());
     }
 
 }

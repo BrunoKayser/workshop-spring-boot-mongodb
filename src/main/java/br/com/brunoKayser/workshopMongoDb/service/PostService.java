@@ -2,10 +2,7 @@ package br.com.brunoKayser.workshopMongoDb.service;
 
 
 import br.com.brunoKayser.workshopMongoDb.domain.Post;
-import br.com.brunoKayser.workshopMongoDb.domain.User;
-import br.com.brunoKayser.workshopMongoDb.dto.UserDTO;
 import br.com.brunoKayser.workshopMongoDb.repository.PostRepository;
-import br.com.brunoKayser.workshopMongoDb.repository.UserRepository;
 import br.com.brunoKayser.workshopMongoDb.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +27,7 @@ public class PostService {
 
     public List<Post> findByTitle(String title){
 
-        return userRepository.findByTitleContainingIgnoreCase(title);
+        return userRepository.searchTitle(title);
 
     }
 }
